@@ -8,7 +8,7 @@ import (
 	"github.com/test-go/testify/assert"
 )
 
-const apiKey = "cd0664da-339d-48e5-a22e-f7c214d81f6c"
+const apiKey = ""
 
 func TestParsedTransaction(t *testing.T) {
 	service := New(apiKey)

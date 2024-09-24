@@ -62,6 +62,7 @@ func (c *Client) GetTransactionHistory(ctx context.Context, params *TransactionQ
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get url")
 	}
+	fmt.Println(urlPath)
 
 	req, err := c.newRequest(ctx, "GET", urlPath, nil)
 	if err != nil {
@@ -108,8 +109,6 @@ func (c *Client) getUrl(endpoint string, params *TransactionQuerry) (string, err
 		return "", err
 	}
 	u.Path = newPath
-
-	fmt.Println(u.String())
 
 	if params != nil {
 		query := u.Query()

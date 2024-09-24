@@ -27,9 +27,9 @@ func (q TransactionQuerry) ToMap() map[string]string {
 		field := value.Field(i)
 		fieldName := typ.Field(i).Name
 
-		queryParam := strings.ToLower(fieldName)
+		queryParam := fieldName
 		if field.Kind() == reflect.String && field.String() != "" {
-			result[queryParam] = field.String()
+			result[strings.ToLower(queryParam)] = field.String()
 		}
 	}
 

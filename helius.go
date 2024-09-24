@@ -70,7 +70,7 @@ type Helius interface {
 	// 	if deposits.Err() != nil {
 	// 		log.Fatal(deposits.Err())
 	// 	}
-	GetDeposits(ctx context.Context, address string) Deposits
+	GetDeposits(ctx context.Context, address string, before *string) Deposits
 }
 
 type helius struct {
@@ -95,10 +95,13 @@ func (h *helius) GetAllTransactionHistory(ctx context.Context, params *client.Tr
 	return h.httpClinet.GetAllTransactionHistory(ctx, params, address)
 }
 
-func (h *helius) GetDeposits(ctx context.Context, address string) Deposits {
+func (h *helius) GetDeposits(ctx context.Context, address string, before *string) Deposits {
 	params := &client.TransactionQuerry{
 		Type:   client.TRANSFER,
 		Source: client.SYSTEM_PROGRAM,
+	}
+	if before != nil {
+		params.Before = *before
 	}
 
 	result := Deposits{

@@ -1,6 +1,9 @@
 package client
 
-import "reflect"
+import (
+	"reflect"
+	"strings"
+)
 
 type TransactionType string
 type TransactionSource string
@@ -24,7 +27,7 @@ func (q TransactionQuerry) ToMap() map[string]string {
 		field := value.Field(i)
 		fieldName := typ.Field(i).Name
 
-		queryParam := fieldName
+		queryParam := strings.ToLower(fieldName)
 		if field.Kind() == reflect.String && field.String() != "" {
 			result[queryParam] = field.String()
 		}

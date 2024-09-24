@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/url"
 
@@ -107,6 +108,8 @@ func (c *Client) getUrl(endpoint string, params *TransactionQuerry) (string, err
 		return "", err
 	}
 	u.Path = newPath
+
+	fmt.Println(u.String())
 
 	if params != nil {
 		query := u.Query()

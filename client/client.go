@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/url"
 
@@ -44,7 +43,6 @@ func (c *Client) GetParsedTransaction(ctx context.Context, transactions ...strin
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get url")
 	}
-	fmt.Println(urlPath)
 	body := map[string]interface{}{
 		"transactions": transactions,
 	}
@@ -63,7 +61,6 @@ func (c *Client) GetTransactionHistory(ctx context.Context, params *TransactionQ
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get url")
 	}
-	fmt.Println(urlPath)
 
 	req, err := c.newRequest(ctx, "GET", urlPath, nil)
 	if err != nil {
@@ -146,7 +143,6 @@ func (c *Client) call(req *http.Request, out interface{}) error {
 	}
 	defer resp.Body.Close()
 
-	fmt.Println(string(resp.Status))
 	if resp.StatusCode != http.StatusOK {
 		return errors.Errorf("bad status code: %d", resp.StatusCode)
 	}
